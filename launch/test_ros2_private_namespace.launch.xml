@@ -6,10 +6,10 @@
   <arg name="output/data" default="~/output/data" />
 
   <!-- Parameter -->
-  <arg name="config_file" default="$(find-pkg-share package_name)/config/package_name.param.yaml" />
+  <arg name="config_file" default="$(find-pkg-share test_ros2_private_namespace)/config/test_ros2_private_namespace.param.yaml" />
 
   <!-- Node -->
-  <node pkg="package_name" exec="package_name_node" name="package_name" output="screen">
+  <node pkg="test_ros2_private_namespace" exec="test_ros2_private_namespace_node" name="test_ros2_private_namespace" output="screen">
     <!-- Input -->
     <remap from="~/input/data" to="$(var input/data)"/>
 

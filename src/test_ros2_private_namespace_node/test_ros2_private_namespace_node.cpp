@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "package_name/package_name_node.hpp"
+#include "test_ros2_private_namespace/test_ros2_private_namespace_node.hpp"
 
 #include <memory>
 #include <string>
@@ -45,21 +45,21 @@ bool update_param(
 }
 }  // namespace
 
-namespace package_name
+namespace test_ros2_private_namespace
 {
-PackageNameNode::PackageNameNode(const rclcpp::NodeOptions & node_options)
-: Node("package_name", node_options)
+TestRos2PrivateNamespaceNode::TestRos2PrivateNamespaceNode(const rclcpp::NodeOptions & node_options)
+: Node("test_ros2_private_namespace", node_options)
 {
   // Parameter Server
-  set_param_res_ =
-    this->add_on_set_parameters_callback(std::bind(&PackageNameNode::onSetParam, this, _1));
+  set_param_res_ = this->add_on_set_parameters_callback(
+    std::bind(&TestRos2PrivateNamespaceNode::onSetParam, this, _1));
 
   // Parameter
   node_param_.update_rate_hz = declare_parameter<double>("update_rate_hz", 10.0);
 
   // Subscriber
   sub_data_ = create_subscription<Int32>(
-    "~/input/data", rclcpp::QoS{1}, std::bind(&PackageNameNode::onData, this, _1));
+    "~/input/data", rclcpp::QoS{1}, std::bind(&TestRos2PrivateNamespaceNode::onData, this, _1));
 
   // Publisher
   pub_data_ = create_publisher<Int32>("~/output/data", 1);
@@ -68,12 +68,12 @@ PackageNameNode::PackageNameNode(const rclcpp::NodeOptions & node_options)
   const auto update_period_ns =
     duration_cast<nanoseconds>(duration<double>(1 / node_param_.update_rate_hz));
   timer_ = rclcpp::create_timer(
-    this, get_clock(), update_period_ns, std::bind(&PackageNameNode::onTimer, this));
+    this, get_clock(), update_period_ns, std::bind(&TestRos2PrivateNamespaceNode::onTimer, this));
 }
 
-void PackageNameNode::onData(const Int32::ConstSharedPtr msg) { data_ = msg; }
+void TestRos2PrivateNamespaceNode::onData(const Int32::ConstSharedPtr msg) { data_ = msg; }
 
-rcl_interfaces::msg::SetParametersResult PackageNameNode::onSetParam(
+rcl_interfaces::msg::SetParametersResult TestRos2PrivateNamespaceNode::onSetParam(
   const std::vector<rclcpp::Parameter> & params)
 {
   rcl_interfaces::msg::SetParametersResult result;
@@ -98,7 +98,7 @@ rcl_interfaces::msg::SetParametersResult PackageNameNode::onSetParam(
   return result;
 }
 
-bool PackageNameNode::isDataReady()
+bool TestRos2PrivateNamespaceNode::isDataReady()
 {
   if (!data_) {
     RCLCPP_INFO_THROTTLE(get_logger(), *get_clock(), 1000, "waiting for data msg...");
@@ -108,7 +108,7 @@ bool PackageNameNode::isDataReady()
   return true;
 }
 
-void PackageNameNode::onTimer()
+void TestRos2PrivateNamespaceNode::onTimer()
 {
   if (!isDataReady()) {
     return;
@@ -122,7 +122,7 @@ void PackageNameNode::onTimer()
   RCLCPP_INFO(get_logger(), "input, output: %d, %d", data_->data, output);
 }
 
-}  // namespace package_name
+}  // namespace test_ros2_private_namespace
 
 #include "rclcpp_components/register_node_macro.hpp"
-RCLCPP_COMPONENTS_REGISTER_NODE(package_name::PackageNameNode)
+RCLCPP_COMPONENTS_REGISTER_NODE(test_ros2_private_namespace::TestRos2PrivateNamespaceNode)

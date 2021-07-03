@@ -13,8 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef PACKAGE_NAME__PACKAGE_NAME_NODE_HPP__
-#define PACKAGE_NAME__PACKAGE_NAME_NODE_HPP__
+#ifndef TEST_ROS2_PRIVATE_NAMESPACE__TEST_ROS2_PRIVATE_NAMESPACE_NODE_HPP__
+#define TEST_ROS2_PRIVATE_NAMESPACE__TEST_ROS2_PRIVATE_NAMESPACE_NODE_HPP__
 
 #include <chrono>
 #include <memory>
@@ -24,14 +24,14 @@
 #include "example_interfaces/msg/int32.hpp"
 #include "rclcpp/rclcpp.hpp"
 
-namespace package_name
+namespace test_ros2_private_namespace
 {
 using example_interfaces::msg::Int32;
 
-class PackageNameNode : public rclcpp::Node
+class TestRos2PrivateNamespaceNode : public rclcpp::Node
 {
 public:
-  explicit PackageNameNode(const rclcpp::NodeOptions & node_options);
+  explicit TestRos2PrivateNamespaceNode(const rclcpp::NodeOptions & node_options);
 
   struct NodeParam
   {
@@ -66,6 +66,6 @@ private:
   NodeParam node_param_{};
 };
 
-}  // namespace package_name
+}  // namespace test_ros2_private_namespace
 
-#endif  // PACKAGE_NAME__PACKAGE_NAME_NODE_HPP__
+#endif  // TEST_ROS2_PRIVATE_NAMESPACE__TEST_ROS2_PRIVATE_NAMESPACE_NODE_HPP__

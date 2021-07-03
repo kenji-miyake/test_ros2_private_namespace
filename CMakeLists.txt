@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(package_name)
+project(test_ros2_private_namespace)
 
 ## Compile options
 if(NOT CMAKE_CXX_STANDARD)
@@ -17,13 +17,13 @@ find_package(ament_cmake_auto REQUIRED)
 ament_auto_find_build_dependencies()
 
 ## Targets
-ament_auto_add_library(package_name_node_component SHARED
-  src/package_name_node/package_name_node.cpp
+ament_auto_add_library(test_ros2_private_namespace_node_component SHARED
+  src/test_ros2_private_namespace_node/test_ros2_private_namespace_node.cpp
 )
 
-rclcpp_components_register_node(package_name_node_component
-  PLUGIN "package_name::PackageNameNode"
-  EXECUTABLE package_name_node
+rclcpp_components_register_node(test_ros2_private_namespace_node_component
+  PLUGIN "test_ros2_private_namespace::TestRos2PrivateNamespaceNode"
+  EXECUTABLE test_ros2_private_namespace_node
 )
 
 ## Tests
