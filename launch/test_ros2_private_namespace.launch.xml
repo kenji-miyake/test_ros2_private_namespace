@@ -1,9 +1,9 @@
 <launch>
   <!-- Input -->
-  <arg name="input/data" default="~/input/data" />
+  <arg name="input/data" default="/input" />
 
   <!-- Output -->
-  <arg name="output/data" default="~/output/data" />
+  <arg name="output/data" default="/output" />
 
   <!-- Parameter -->
   <arg name="config_file" default="$(find-pkg-share test_ros2_private_namespace)/config/test_ros2_private_namespace.param.yaml" />
